@@ -11,4 +11,17 @@
 }
 
 
+@font-face {
+    font-family: "1942";
+    src: url("./assets/fonts/1942.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "exmouth";
+    src: url("./assets/fonts/exmouth.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
 
