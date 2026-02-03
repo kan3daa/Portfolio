@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import {computed} from 'vue'
 
 const birthDate = new Date('2006-10-30');
 const today = new Date();
@@ -16,7 +16,7 @@ const age = computed(() => {
 
 <template>
   <div>
-    <Menu />
+    <Menu/>
 
     <div class="top_info">
       <div>
@@ -24,12 +24,15 @@ const age = computed(() => {
       <h1>Portfolio</h1>
       <p>
         J'ai {{ age }} ans et je suis étudiant à
-        <a href="https://www.gastonberger.fr/">Gaston Berger</a> en BTS Services Informatiques aux Organisations, option Solutions Logicielles et Applications Métiers |
-        <a href="https://www.onisep.fr/ressources/univers-formation/formations/post-bac/bts-services-informatiques-aux-organisations-option-b-solutions-logicielles-et-applications-metiers">SIO SLAM</a>.
+        <a href="https://www.gastonberger.fr/">Gaston Berger</a> en BTS Services Informatiques aux Organisations, option
+        Solutions Logicielles et Applications Métiers |
+        <a href="https://www.onisep.fr/ressources/univers-formation/formations/post-bac/bts-services-informatiques-aux-organisations-option-b-solutions-logicielles-et-applications-metiers">SIO
+          SLAM</a>.
       </p>
       <p>
         En dehors de ma vie étudiante, j'aime
-        <a href="https://letterboxd.com/kan3da_movie/list/fav/">les films</a> et les jeux vidéo (Soulsborne & Silent Hill sont mes préférés).<br>
+        <a href="https://letterboxd.com/kan3da_movie/list/fav/">les films</a> et les jeux vidéo (Soulsborne & Silent
+        Hill sont mes préférés).<br>
         La nourriture, regarder l'UFC/boxe, lire des livres, des mangas et des manhwas...
       </p>
     </div>
@@ -39,11 +42,13 @@ const age = computed(() => {
       <div>
         <p>
           Classe de seconde professionnelle métiers des transitions numérique et énergétique -
-          <a href="https://www.onisep.fr/ressources/univers-formation/formations/lycees/classe-de-2de-professionnelle-metiers-des-transitions-numerique-et-energetique">TSN</a> | 2021-2022
+          <a href="https://www.onisep.fr/ressources/univers-formation/formations/lycees/classe-de-2de-professionnelle-metiers-des-transitions-numerique-et-energetique">TSN</a>
+          | 2021-2022
         </p>
         <p>
           Classe de première & terminale professionnelle Systèmes Numériques -
-          <a href="https://sti.eduscol.education.fr/formations/bac-pro/bac-pro-systemes-numeriques-sn">SN</a> | 2022-2024 | Bac Mention Très Bien
+          <a href="https://sti.eduscol.education.fr/formations/bac-pro/bac-pro-systemes-numeriques-sn">SN</a> |
+          2022-2024 | Bac Mention Très Bien
         </p>
       </div>
     </div>
@@ -57,6 +62,7 @@ h1 {
   margin: 0;
   font-family: "exmouth", serif;
 }
+
 h2 {
   font-weight: 300;
 }
@@ -73,6 +79,14 @@ p {
   line-height: 1.4;
   max-width: 28em;
   margin: 2em 0;
+}
+
+a {
+  color: #121314;
+}
+
+a:visited {
+  color: #551A8B;
 }
 
 </style>
