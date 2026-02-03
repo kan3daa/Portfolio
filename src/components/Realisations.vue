@@ -4,19 +4,24 @@ import RealCard from "./realCard.vue";
 </script>
 
 <template>
+  <div class="realisation-container">
     <h2>Réalisations</h2>
     <RealCard/>
+  </div>
 </template>
 
 <style scoped>
-h1 {
-  font-size: 15em;
-  font-weight: 700;
-  margin: 0;
-  font-family: "exmouth", serif;
+.realisation-container {
+max-width: 1200px;
+margin: 0 auto;
+padding: 1rem;
 }
+
 h2 {
-  font-weight: 300;
+font-size: 3em;
+font-weight: 700;
+margin-bottom: 0.5rem;
+font-family: "Helvitica", serif;
 }
 
 h4 {
