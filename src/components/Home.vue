@@ -81,10 +81,10 @@ h1 {
 }
 
 h2 {
-font-size: 3em;
-font-weight: 700;
-margin-bottom: 0.5rem;
-font-family: "Helvitica", serif;
+  font-size: 3em;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  font-family: "Helvetica", serif;
 } 
 
 h4 {
