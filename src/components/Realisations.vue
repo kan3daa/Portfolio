@@ -1,5 +1,10 @@
 <script setup lang="ts">
 import { ref } from 'vue';
+import AdminAP1 from '../assets/IMG/AP1/AdminAP1.png';
+import ReadmeAP1 from '../assets/IMG/AP1/ReadmeAP1.png';
+import testAP1 from '../assets/IMG/AP1/testAP1.png';
+import dataBaseAP1 from '../assets/IMG/AP1/dataBaseAP1.png';
+import deploimAP1 from '../assets/IMG/AP1/deploimAP1.png';
 
 interface Task {
   id: number;
@@ -45,15 +50,17 @@ const tasks: Task[] = [
     description: "Développement complet d'un site web pour une association incluant backend, frontend et gestion de base de données.",
     technologies: ["Backend", "Frontend", "Base de données", "Tests", "Déploiement"],
     proofs: [
-      { title: "Documentation technique", type: "document" },
-      { title: "Documentation utilisateur", type: "document" },
-      { title: "Tests unitaires et d'intégration", type: "code" },
-      { title: "Procédure de déploiement", type: "document" }
+      { title: "Front-end", type: "document" },
+      { title: "Page d'administration", type: "screen", content: AdminAP1 },
+      { title: "Base de données", type: "code", content: dataBaseAP1 },
+      { title: "Procédure de déploiement", type: "screen", content: deploimAP1 },
+      { title: "Tests d'intégration", type: "code", content: testAP1 },
+      { title: "Documentation utilisateur", type: "document", content: ReadmeAP1 },
     ]
   },
   {
     id: 2,
-    name: "Stage 1 – Visual Inventory (Django OSS)",
+    name: "Stage 1 – Visual Inventory (Django)",
     period: "5 Janvier 2026 - 14 Février 2026",
     competences: {
       patrimoine: "✓",
@@ -68,8 +75,7 @@ const tasks: Task[] = [
     description: "Contribution à un projet open source Django pour la gestion d'inventaire. Mise en place de CI/CD et respect des standards de développement.",
     technologies: ["Django", "Python", "Git", "CI/CD", "Open Source"],
     proofs: [
-      { title: "Commits Git et pull requests", type: "code" },
-      { title: "Pipeline CI/CD", type: "screenshot" },
+      { title: "Commits Git", type: "code" },
       { title: "Documentation du projet", type: "document" },
       { title: "Issues et corrections", type: "screenshot" }
     ]
@@ -247,7 +253,7 @@ const tasks: Task[] = [
     description: "Refonte complète du site web développé en AP1 avec amélioration du SEO et de la visibilité en ligne.",
     technologies: ["Web design", "SEO", "Référencement", "UX/UI"],
     proofs: [
-      { title: "Avant/Après design", type: "screenshot" },
+      { title: "Avant/Après design", type: "screenshot"},
       { title: "Rapport SEO", type: "document" },
       { title: "Mesures de visibilité", type: "screenshot" },
       { title: "Documentation utilisateur", type: "document" }
@@ -472,9 +478,6 @@ const getCompetenceIcon = (value: string) => {
               </div>
             </section>
 
-            <section class="section">
-            </section>
-
             <section class="section proofs-section">
               <button @click="toggleProofs" class="proofs-toggle">
                 <span>{{ showProofs ? 'Masquer les preuves' : 'Voir les preuves' }}</span>
@@ -498,7 +501,7 @@ const getCompetenceIcon = (value: string) => {
                         <polyline points="16 18 22 12 16 6"></polyline>
                         <polyline points="8 6 2 12 8 18"></polyline>
                       </svg>
-                      <svg v-else-if="proof.type === 'screenshot'" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <svg v-else-if="proof.type === 'screenshot' || proof.type === 'screen'" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
                         <circle cx="8.5" cy="8.5" r="1.5"></circle>
                         <polyline points="21 15 16 10 5 21"></polyline>
@@ -517,7 +520,10 @@ const getCompetenceIcon = (value: string) => {
                     <div class="proof-content">
                       <div class="proof-title">{{ proof.title }}</div>
                       <div class="proof-type">{{ proof.type }}</div>
-                      <div class="proof-placeholder">[Preuve à ajouter]</div>
+                      <div v-if="proof.content" class="proof-image">
+                        <img :src="proof.content" :alt="proof.title" />
+                      </div>
+                      <div v-else class="proof-placeholder">Preuve à ajouter</div>
                     </div>
                   </div>
                 </div>
@@ -532,19 +538,21 @@ const getCompetenceIcon = (value: string) => {
 
 <style scoped>
 .realisation-container {
-  max-width: 1400px;
+  max-width: auto;
   margin: 0 auto;
   padding: 1rem;
 }
 
 h2 {
+  margin-left: 4rem;
   font-size: 3em;
-  font-weight: 700;
+  font-weight: 500;
   margin-bottom: 0.5rem;
-  font-family: "Helvitica", serif;
+  font-family: "Helvetica", serif;
 }
 
 .intro {
+  margin-left: 4rem;
   font-size: 1.2em;
   font-weight: 300;
   color: #666;
@@ -733,7 +741,7 @@ h2 {
   font-weight: 700;
   line-height: 1.2;
   margin: 0 0 1rem 0;
-  font-family: "Helvetica", serif;
+  font-family: "Helvetica", sans-serif;
 }
 
 .task-period {
@@ -751,7 +759,7 @@ h2 {
   font-size: 1.5em;
   font-weight: 700;
   margin-bottom: 1rem;
-  font-family: "Helvetica", serif;
+  font-family: "Helvetica", sans-serif;
 }
 
 .section p {
@@ -811,13 +819,6 @@ h2 {
 
 .competence-value.none {
   color: #9ca3af;
-}
-
-.notes {
-  background: #f8f8f8;
-  padding: 1rem;
-  border-left: 4px solid #000;
-  font-style: italic;
 }
 
 .proofs-section {
@@ -896,6 +897,17 @@ h2 {
   margin-bottom: 0.5rem;
 }
 
+.proof-image {
+  margin-top: 0.5rem;
+}
+
+.proof-image img {
+  max-width: 100%;
+  height: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
 .proof-placeholder {
   font-size: 0.9em;
   color: #999;
@@ -912,7 +924,7 @@ h2 {
   transition: opacity 0.3s ease;
 }
 
-.modal-enter-from,l
+.modal-enter-from,
 .modal-leave-to {
   opacity: 0;
 }
@@ -945,10 +957,7 @@ h2 {
   }
 
   h2 {
-    font-size: 3em;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-    font-family: "Helvetica", serif;
+    font-size: 2em;
   }
 
   .legend {
