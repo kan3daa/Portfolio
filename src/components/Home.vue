@@ -1,32 +1,35 @@
 <script setup lang="ts">
-import {computed} from 'vue'
+import { computed } from 'vue'
 
 const birthDate = new Date('2006-10-30');
 
 const age = computed(() => {
-  const today = new Date(); // recalcul chaque fois que c'est lu
+  const today = new Date();
   let a = today.getFullYear() - birthDate.getFullYear();
   const birthdayPassed =
-      today.getMonth() > birthDate.getMonth() ||
-      (today.getMonth() === birthDate.getMonth() && today.getDate() >= birthDate.getDate());
+    today.getMonth() > birthDate.getMonth() ||
+    (today.getMonth() === birthDate.getMonth() && today.getDate() >= birthDate.getDate());
   if (!birthdayPassed) a--;
   return a;
 });
-
 </script>
 
 <template>
   <div class="portfolio-container">
     <h1>Portfolio</h1>
-    
+
     <div class="content-section">
       <h2>Présentation</h2>
       <p>
-        je m'appelle <strong>Matias Sanches Da Silva</strong> j'ai <strong>{{ age }} ans </strong> et je suis étudiant à
+        je m'appelle
+        <strong class="name-tag">
+          <span class="dot"></span>
+          Matias Sanches Da Silva
+        </strong>
+        j'ai <strong>{{ age }} ans</strong> et je suis étudiant à
         <a href="https://www.gastonberger.fr/" target="_blank">Gaston Berger</a> en BTS Services Informatiques aux Organisations, <br> option
         Solutions Logicielles et Applications Métiers |
-        <a href="https://www.onisep.fr/ressources/univers-formation/formations/post-bac/bts-services-informatiques-aux-organisations-option-b-solutions-logicielles-et-applications-metiers" target="_blank">SIO
-          SLAM</a>.
+        <a href="https://www.onisep.fr/ressources/univers-formation/formations/post-bac/bts-services-informatiques-aux-organisations-option-b-solutions-logicielles-et-applications-metiers" target="_blank">SIO SLAM</a>.
       </p>
       <p>
         En dehors de ma vie étudiante, j'aime
@@ -49,7 +52,7 @@ const age = computed(() => {
             </p>
           </div>
         </div>
-        
+
         <div class="timeline-item">
           <div class="timeline-period">2022-2024</div>
           <div class="timeline-content">
@@ -73,6 +76,27 @@ const age = computed(() => {
   padding: 2rem;
 }
 
+/* ===== NAME TAG ===== */
+.name-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  border: 2px dashed #6aaa7a;
+  border-radius: 8px;
+  padding: 0.1rem 0.75rem 0.1rem 0.5rem;
+  color: #3a7a4a;
+  font-weight: 600;
+  vertical-align: middle;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #3a7a4a;
+  flex-shrink: 0;
+}
+
 h1 {
   font-size: 15em;
   font-weight: 700;
@@ -85,7 +109,7 @@ h2 {
   font-weight: 700;
   margin-bottom: 0.5rem;
   font-family: "Helvetica", serif;
-} 
+}
 
 h4 {
   font-size: 1.4em;
@@ -111,15 +135,10 @@ a {
   transition: color 0.2s;
 }
 
-a:hover {
-  color: #000;
-}
+a:hover { color: #000; }
+a:visited { color: #551A8B; }
 
-a:visited {
-  color: #551A8B;
-}
-
-/* Timeline Styles */
+/* Timeline */
 .timeline {
   position: relative;
   padding-left: 2rem;
@@ -162,13 +181,8 @@ a:visited {
   letter-spacing: 0.05em;
 }
 
-.timeline-content h4 {
-  margin-top: 0.5rem;
-}
-
-.timeline-content p {
-  margin: 0.75rem 0;
-}
+.timeline-content h4 { margin-top: 0.5rem; }
+.timeline-content p { margin: 0.75rem 0; }
 
 .mention-badge {
   display: inline-block;
@@ -181,30 +195,12 @@ a:visited {
   letter-spacing: 0.05em;
 }
 
-/* Responsive */
 @media (max-width: 768px) {
-  .portfolio-container {
-    padding: 1rem;
-  }
-
-  h1 {
-    font-size: 8em;
-  }
-
-  h2 {
-    font-size: 2em;
-  }
-
-  p {
-    font-size: 1.1em;
-  }
-
-  .timeline {
-    padding-left: 1.5rem;
-  }
-
-  .timeline-item {
-    padding-left: 1.5rem;
-  }
+  .portfolio-container { padding: 1rem; }
+  h1 { font-size: 8em; }
+  h2 { font-size: 2em; }
+  p { font-size: 1.1em; }
+  .timeline { padding-left: 1.5rem; }
+  .timeline-item { padding-left: 1.5rem; }
 }
 </style>

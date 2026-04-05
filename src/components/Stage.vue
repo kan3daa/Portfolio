@@ -379,7 +379,7 @@ font-family: "Helvitica", serif;
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  z-index: 1000;
+  z-index: 300;
   overflow-y: auto;
   padding: 2rem 1rem;
 }

@@ -128,7 +128,7 @@ const articles: Article[] = [
 
       <h3>Spécificités Militaires et Tendances</h3>
       <p>En militaire, les systèmes doivent être MIL-STD-810 certifiés (résistance extrême). L'IA embarquée (YOLO pour détection objets) permet l'autonomie en jamming GPS. La production scale via impression 3D pour pièces custom. Tendance : essaims collaboratifs (swarm intelligence) avec edge AI pour coordination décentralisée.<span class="citation"></span></p>
-      <p>Pour les ingénieurs BTS SLAM, maîtriser Python/ROS + C++ embarqué ouvre des portes en R&D robotique. Les projets Arduino évoluent vers PX4 sur Raspberry Pi 5 pour drones low-cost.<span class="citation"></span></p>
+      <p>Pour les ingénieurs , maîtriser Python/ROS + C++ embarqué ouvre des portes en R&D robotique. Les projets Arduino évoluent vers PX4 sur Raspberry Pi 5 pour drones low-cost.<span class="citation"></span></p>
 
       <h3>Références</h3>
       <ul>
@@ -335,7 +335,7 @@ background: rgba(0, 0, 0, 0.8);
 display: flex;
 justify-content: center;
 align-items: flex-start;
-z-index: 1000;
+z-index: 300;
 overflow-y: auto;
 padding: 2rem 1rem;
 }
