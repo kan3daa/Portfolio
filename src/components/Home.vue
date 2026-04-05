@@ -48,7 +48,7 @@ const age = computed(() => {
             <h4>Classe de seconde professionnelle</h4>
             <p>
               Métiers des transitions numérique et énergétique -
-              <a href="https://www.onisep.fr/ressources/univers-formation/formations/lycees/classe-de-2de-professionnelle-metiers-des-transitions-numerique-et-energetique" target="_blank">TSN</a>
+              <a href="https://www.onisep.fr/ressources/univers-formation/formations/lycees/classe-de-2de-professionnelle-metiers-des-transitions-numerique-et-energetique" target="_blank">TNE</a>
             </p>
           </div>
         </div>
