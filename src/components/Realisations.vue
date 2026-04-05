@@ -385,7 +385,6 @@ const tasks: Task[] = [
     { title: "Script de sauvegarde base de données PostgreSQL", type: "code", linkedCompetence: "Gérer des sauvegardes" },
     { title: "Diagramme UML (cas d'utilisation gestionnaire/technicien)", type: "diagram", linkedCompetence: "Concevoir un diagramme de cas d'utilisation (UML)" },
     { title: "Rapport de recette / fichier de tests fonctionnels", type: "document", linkedCompetence: "Réaliser les tests d'intégration et d'acceptation" },
-    { title: "Procédure de déploiement Next.js + PostgreSQL", type: "document", linkedCompetence: "Déployer un service" },
     { title: "Guide utilisateur gestionnaire/technicien", type: "document", linkedCompetence: "Accompagner les utilisateurs" },
     { title: "Comparatif solutions collaboratives + choix argumenté", type: "document", linkedCompetence: "Mettre en oeuvre des outils et stratégies de veille informationnelle" },
     { title: "Liste des ressources de veille (Next.js, PostgreSQL, JWT)", type: "document", linkedCompetence: "Mettre en place son environnement d'apprentissage personnel" },
