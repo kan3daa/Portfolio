@@ -141,7 +141,7 @@ const tasks: Task[] = [
     period: "Dates à préciser",
     competences: {
       patrimoine: "✓", incidents: "✓", presenceEnLigne: "✓",
-      modeProjet: "✓", miseADispo: "✓", devPro: "△",
+      modeProjet: "✓", miseADispo: "✓", devPro: "✓",
     },
     description: "Développement complet d'un site web pour une association incluant backend, frontend et gestion de base de données.",
     technologies: ["Next.js", "React", "Node.js / Backend", "MySQL", "Tests d'intégration", "Déploiement"],
@@ -152,10 +152,10 @@ const tasks: Task[] = [
         level: "✓",
         subCompetences: [
           { label: "Recenser et identifier les ressources numériques", level: "✓", indicator: "Le recensement est exhaustif via un outil de gestion des actifs", proofSuggestion: "Schéma d'architecture / inventaire des ressources (serveur, BDD, dépôt Git)" },
-          { label: "Mettre en place et vérifier les niveaux d'habilitation", level: "✓", indicator: "Les droits correspondent aux habilitations des acteurs", proofSuggestion: "Capture de la page d'administration avec les rôles utilisateurs" },
-          { label: "Vérifier les conditions de continuité du service", level: "✓", indicator: "Conditions de continuité vérifiées", proofSuggestion: "Documentation de déploiement / procédure de reprise" },
+          { label: "Mettre en place et vérifier les niveaux d'habilitation associés à un service", level: "✓", indicator: "Les droits correspondent aux habilitations des acteurs", proofSuggestion: "Capture de la page d'administration avec les rôles utilisateurs" },
+          { label: "Vérifier les conditions de la continuité d'un service informatique", level: "✓", indicator: "Conditions de continuité vérifiées", proofSuggestion: "Documentation de déploiement / procédure de reprise" },
           { label: "Gérer des sauvegardes", level: "✓", indicator: "Sauvegardes réalisées, restaurations testées", proofSuggestion: "Script de sauvegarde BDD ou procédure documentée" },
-          { label: "Vérifier les règles d'utilisation des ressources", level: "✓", indicator: "Écarts détectés et signalés", proofSuggestion: "README avec contraintes d'utilisation du projet" }
+          { label: "Vérifier le respect des règles d'utilisation des ressources numériques", level: "✓", indicator: "Écarts détectés et signalés", proofSuggestion: "README avec contraintes d'utilisation du projet" }
         ]
       },
       {
@@ -172,8 +172,8 @@ const tasks: Task[] = [
         name: "Développer la présence en ligne",
         level: "✓",
         subCompetences: [
-          { label: "Valoriser l'image sur les médias numériques", level: "✓", indicator: "Image conforme aux attentes, enjeux économiques identifiés", proofSuggestion: "Screenshots du site public, charte graphique" },
-          { label: "Participer à l'évolution d'un site Web", level: "✓", indicator: "Site évolué conformément au besoin", proofSuggestion: "Historique Git / changelog / comparaison avant-après" }
+          { label: "Participer à la valorisation de l'image de l'organisation sur les médias numériques en tenant compte du cadre juridique et des enjeux économiques", level: "✓", indicator: "Image conforme aux attentes, enjeux économiques identifiés", proofSuggestion: "Screenshots du site public, charte graphique" },
+          { label: "Participer à l'évolution d'un site Web exploitant les données de l'organisation", level: "✓", indicator: "Site évolué conformément au besoin", proofSuggestion: "Historique Git / changelog / comparaison avant-après" }
         ]
       },
       {
@@ -181,9 +181,9 @@ const tasks: Task[] = [
         name: "Travailler en mode projet",
         level: "✓",
         subCompetences: [
-          { label: "Analyser les objectifs et modalités d'organisation", level: "✓", indicator: "Objectifs et modalités explicités", proofSuggestion: "Cahier des charges ou spécifications fonctionnelles" },
+          { label: "Analyser les objectifs et les modalités d'organisation d'un projet", level: "✓", indicator: "Objectifs et modalités explicités", proofSuggestion: "Cahier des charges ou spécifications fonctionnelles + diagramme UML acteurs/cas d'utilisation" },
           { label: "Planifier les activités", level: "✓", indicator: "Activités planifiées selon une méthodologie, découpage réaliste", proofSuggestion: "Calendrier effectif détaillé avec jalons, livrables et dates réelles" },
-          { label: "Évaluer les indicateurs de suivi et analyser les écarts", level: "✓", indicator: "Compte rendu clair, écarts justifiés", proofSuggestion: "Compte rendu de réunion ou bilan de projet" }
+          { label: "Évaluer les indicateurs de suivi d'un projet et analyser les écarts", level: "✓", indicator: "Compte rendu clair, écarts justifiés", proofSuggestion: "Compte rendu de réunion ou bilan de projet" }
         ]
       },
       {
@@ -191,41 +191,40 @@ const tasks: Task[] = [
         name: "Mettre à disposition un service informatique",
         level: "✓",
         subCompetences: [
-          { label: "Concevoir un diagramme de cas d'utilisation (UML)", level: "✓", indicator: "Les acteurs et fonctionnalités du service sont identifiés", proofSuggestion: "Diagramme UML avec acteurs Admin / Bénévole et leurs cas d'utilisation" },
-          { label: "Réaliser les tests d'intégration et d'acceptation", level: "✓", indicator: "Tests pertinents rédigés et effectués, rapport produit", proofSuggestion: "Rapport de tests d'intégration avec résultats" },
+          { label: "Réaliser les tests d'intégration et d'acceptation d'un service", level: "✓", indicator: "Tests pertinents rédigés et effectués, rapport produit", proofSuggestion: "Rapport de tests d'intégration avec résultats" },
           { label: "Déployer un service", level: "✓", indicator: "Service déployé opérationnel", proofSuggestion: "Procédure de déploiement documentée, URL du site live" },
-          { label: "Accompagner les utilisateurs", level: "✓", indicator: "Support disponible, modalités d'accompagnement définies", proofSuggestion: "Guide utilisateur / README accessible aux membres de l'association" }
+          { label: "Accompagner les utilisateurs dans la mise en place d'un service", level: "✓", indicator: "Support disponible, modalités d'accompagnement définies", proofSuggestion: "Guide utilisateur / README accessible aux membres de l'association" }
         ]
       },
       {
         id: "devPro",
         name: "Organiser son développement professionnel",
-        level: "△",
+        level: "✓",
         subCompetences: [
           { label: "Mettre en place son environnement d'apprentissage personnel", level: "✓", indicator: "Ressources identifiées et exploitées pour monter en compétence sur React", proofSuggestion: "Liste des outils de veille utilisés (MDN, React.dev, Dev.to, Node Weekly, JS Weekly)" },
-          { label: "Renforcer ses compétences", level: "△", indicator: "Utilisation de React dans le projet AP1 (composants, hooks, intégration frontend)", proofSuggestion: "Extraits de code React utilisés dans le projet – composants, useState, appels API" },
-          { label: "Mettre en oeuvre des outils et stratégies de veille informationnelle", level: "△", indicator: "Veille active sur React/JS pendant le développement", proofSuggestion: "Journal de veille React/JS avec sources consultées pendant AP1" }
+          { label: "Mettre en œuvre des outils et stratégies de veille informationnelle", level: "✓", indicator: "Veille active sur React/JS pendant le développement", proofSuggestion: "Journal de veille React/JS avec sources consultées pendant AP1" },
+          { label: "Développer son projet professionnel", level: "✓", indicator: "Utilisation de React dans le projet AP1 (composants, hooks, intégration frontend)", proofSuggestion: "Extraits de code React utilisés dans le projet – composants, useState, appels API" }
         ]
       }
     ],
     proofs: [
-      { title: "Diagramme de cas d'utilisation (UML)", type: "diagram", linkedCompetence: "Concevoir un diagramme de cas d'utilisation (UML)" },
-      { title: "Page d'administration (rôles et habilitations)", type: "screen", linkedCompetence: "Mettre en place et vérifier les niveaux d'habilitation" },
+      { title: "Diagramme de cas d'utilisation (UML)", type: "diagram", linkedCompetence: "Analyser les objectifs et les modalités d'organisation d'un projet" },
+      { title: "Page d'administration (rôles et habilitations)", type: "screen", linkedCompetence: "Mettre en place et vérifier les niveaux d'habilitation associés à un service" },
       { title: "Schéma base de données (MCD/MPD)", type: "code", linkedCompetence: "Recenser et identifier les ressources numériques" },
-      { title: "Screenshots du site public (frontend)", type: "screen", linkedCompetence: "Valoriser l'image sur les médias numériques" },
-      { title: "Cahier des charges / spécifications fonctionnelles", type: "document", linkedCompetence: "Analyser les objectifs et modalités d'organisation" },
-      { title: "Rapport de tests d'intégration", type: "document", linkedCompetence: "Réaliser les tests d'intégration et d'acceptation" },
+      { title: "Screenshots du site public (frontend)", type: "screen", linkedCompetence: "Participer à la valorisation de l'image de l'organisation sur les médias numériques en tenant compte du cadre juridique et des enjeux économiques" },
+      { title: "Cahier des charges / spécifications fonctionnelles", type: "document", linkedCompetence: "Analyser les objectifs et les modalités d'organisation d'un projet" },
+      { title: "Rapport de tests d'intégration", type: "document", linkedCompetence: "Réaliser les tests d'intégration et d'acceptation d'un service" },
       { title: "Procédure de déploiement documentée + URL du site live", type: "screen", linkedCompetence: "Déployer un service" },
-      { title: "Guide utilisateur / README association", type: "document", linkedCompetence: "Accompagner les utilisateurs" },
+      { title: "Guide utilisateur / README association", type: "document", linkedCompetence: "Accompagner les utilisateurs dans la mise en place d'un service" },
       { title: "Proposition technique – infrastructure et coûts (VPS, hébergement, domaine)", type: "document", linkedCompetence: "Recenser et identifier les ressources numériques" },
       { title: "Calendrier effectif détaillé", type: "document", linkedCompetence: "Planifier les activités" },
-      { title: "Documentation de déploiement / procédure de reprise", type: "document", linkedCompetence: "Vérifier les conditions de continuité du service" },
+      { title: "Documentation de déploiement / procédure de reprise", type: "document", linkedCompetence: "Vérifier les conditions de la continuité d'un service informatique" },
       { title: "Script de sauvegarde BDD", type: "code", linkedCompetence: "Gérer des sauvegardes" },
-      { title: "Historique Git / comparaison avant-après", type: "screenshot", linkedCompetence: "Participer à l'évolution d'un site Web" },
-      { title: "Compte rendu de réunion ou bilan de projet", type: "document", linkedCompetence: "Évaluer les indicateurs de suivi et analyser les écarts" },
+      { title: "Historique Git / comparaison avant-après", type: "screenshot", linkedCompetence: "Participer à l'évolution d'un site Web exploitant les données de l'organisation" },
+      { title: "Compte rendu de réunion ou bilan de projet", type: "document", linkedCompetence: "Évaluer les indicateurs de suivi d'un projet et analyser les écarts" },
       { title: "Liste des correctifs apportés suite aux retours utilisateurs", type: "document", linkedCompetence: "Traiter des demandes concernant les applications" },
       { title: "Liste des outils de veille utilisés (MDN, React.dev, Dev.to, newsletters)", type: "document", linkedCompetence: "Mettre en place son environnement d'apprentissage personnel" },
-      { title: "Extraits de code React – composants et hooks utilisés dans AP1", type: "code", linkedCompetence: "Renforcer ses compétences" },
+      { title: "Extraits de code React – composants et hooks utilisés dans AP1", type: "code", linkedCompetence: "Développer son projet professionnel" },
     ]
   },
   {
@@ -244,7 +243,7 @@ const tasks: Task[] = [
         name: "Gérer le patrimoine informatique",
         level: "✓",
         subCompetences: [
-          { label: "Exploiter des référentiels, normes et standards", level: "✓", indicator: "Référentiels mobilisés de façon pertinente", proofSuggestion: "Respect des conventions de code du projet open source (CONTRIBUTING.md, PEP8)" },
+          { label: "Exploiter des référentiels, normes et standards adoptés par le prestataire informatique", level: "✓", indicator: "Référentiels mobilisés de façon pertinente", proofSuggestion: "Respect des conventions de code du projet open source (CONTRIBUTING.md, PEP8)" },
           { label: "Recenser et identifier les ressources numériques", level: "✓", indicator: "Recensement exhaustif", proofSuggestion: "Schéma d'architecture du projet / README du dépôt" }
         ]
       },
@@ -262,7 +261,7 @@ const tasks: Task[] = [
         name: "Travailler en mode projet",
         level: "✓",
         subCompetences: [
-          { label: "Analyser les objectifs et modalités d'organisation", level: "✓", indicator: "Objectifs explicités", proofSuggestion: "Description des tickets / user stories traités" },
+          { label: "Analyser les objectifs et les modalités d'organisation d'un projet", level: "✓", indicator: "Objectifs explicités", proofSuggestion: "Description des tickets / user stories traités" },
           { label: "Planifier les activités", level: "✓", indicator: "Activités planifiées, ressources mobilisées", proofSuggestion: "Board GitHub Projects / kanban pendant le stage" }
         ]
       },
@@ -280,22 +279,22 @@ const tasks: Task[] = [
         level: "✓",
         subCompetences: [
           { label: "Mettre en place son environnement d'apprentissage personnel", level: "✓", indicator: "Démarche d'auto-formation structurée avant application sur projet réel", proofSuggestion: "Notes de lecture de la documentation Docker et Docker Compose officielle, liste des ressources consultées" },
-          { label: "Renforcer ses compétences", level: "✓", indicator: "Compétences acquises sur Docker/Compose et appliquées au projet Visual Inventory", proofSuggestion: "Projets d'entraînement Docker réalisés avant le stage, puis intégration au projet open source" },
-          { label: "Mettre en oeuvre des outils de veille informationnelle", level: "✓", indicator: "Sources techniques identifiées et exploitées", proofSuggestion: "Références consultées : documentation officielle Docker, guides DevOps, CONTRIBUTING.md du projet" }
+          { label: "Développer son projet professionnel", level: "✓", indicator: "Compétences acquises sur Docker/Compose et appliquées au projet Visual Inventory", proofSuggestion: "Projets d'entraînement Docker réalisés avant le stage, puis intégration au projet open source" },
+          { label: "Mettre en œuvre des outils et stratégies de veille informationnelle", level: "✓", indicator: "Sources techniques identifiées et exploitées", proofSuggestion: "Références consultées : documentation officielle Docker, guides DevOps, CONTRIBUTING.md du projet" }
         ]
       }
     ],
     proofs: [
-      { title: "Commits Git sur le dépôt open source", type: "screenshot", linkedCompetence: "Exploiter des référentiels, normes et standards" },
+      { title: "Commits Git sur le dépôt open source", type: "screenshot", linkedCompetence: "Exploiter des référentiels, normes et standards adoptés par le prestataire informatique" },
       { title: "README / schéma d'architecture du dépôt", type: "document", linkedCompetence: "Recenser et identifier les ressources numériques" },
       { title: "Issues GitHub ouvertes/fermées", type: "screenshot", linkedCompetence: "Collecter, suivre et orienter des demandes" },
       { title: "Pull Requests avec description du correctif", type: "screenshot", linkedCompetence: "Traiter des demandes concernant les applications" },
-      { title: "Description des tickets / user stories traités", type: "document", linkedCompetence: "Analyser les objectifs et modalités d'organisation" },
+      { title: "Description des tickets / user stories traités", type: "document", linkedCompetence: "Analyser les objectifs et les modalités d'organisation d'un projet" },
       { title: "Board GitHub Projects / kanban du stage", type: "screenshot", linkedCompetence: "Planifier les activités" },
       { title: "Dockerfile annoté et docker-compose.yml documenté", type: "code", linkedCompetence: "Déployer un service" },
       { title: "Notes d'apprentissage Docker et ressources consultées", type: "document", linkedCompetence: "Mettre en place son environnement d'apprentissage personnel" },
-      { title: "Projets d'entraînement Docker réalisés", type: "screenshot", linkedCompetence: "Renforcer ses compétences" },
-      { title: "Liste des références de veille (docs Docker, guides DevOps)", type: "document", linkedCompetence: "Mettre en oeuvre des outils de veille informationnelle" },
+      { title: "Projets d'entraînement Docker réalisés", type: "screenshot", linkedCompetence: "Développer son projet professionnel" },
+      { title: "Liste des références de veille (docs Docker, guides DevOps)", type: "document", linkedCompetence: "Mettre en œuvre des outils et stratégies de veille informationnelle" },
     ]
   },
   {
@@ -314,82 +313,80 @@ const tasks: Task[] = [
         name: "Organiser son développement professionnel",
         level: "✓",
         subCompetences: [
-          { label: "Mettre en oeuvre des outils de veille informationnelle", level: "✓", indicator: "Veille sur techniques émergentes", proofSuggestion: "Document de synthèse sur les risques IA / prompt injection avec sources OWASP LLM Top 10" },
-          { label: "Renforcer ses compétences", level: "✓", indicator: "Compétences renforcées", proofSuggestion: "Screenshots des niveaux Gandalf réussis, analyse des méthodes utilisées" }
+          { label: "Mettre en œuvre des outils et stratégies de veille informationnelle", level: "✓", indicator: "Veille sur techniques émergentes", proofSuggestion: "Document de synthèse sur les risques IA / prompt injection avec sources OWASP LLM Top 10" },
+          { label: "Développer son projet professionnel", level: "✓", indicator: "Compétences renforcées sur la sécurité IA", proofSuggestion: "Screenshots des niveaux Gandalf réussis, analyse des méthodes utilisées" }
         ]
       }
     ],
     proofs: [
-      { title: "Synthèse des risques prompt injection (OWASP LLM Top 10)", type: "document", linkedCompetence: "Mettre en oeuvre des outils de veille informationnelle" },
-      { title: "Screenshots des niveaux Gandalf réussis", type: "screenshot", linkedCompetence: "Renforcer ses compétences" },
-      { title: "Analyse des méthodes utilisées pour contourner les filtres IA", type: "document", linkedCompetence: "Renforcer ses compétences" },
+      { title: "Synthèse des risques prompt injection (OWASP LLM Top 10)", type: "document", linkedCompetence: "Mettre en œuvre des outils et stratégies de veille informationnelle" },
+      { title: "Screenshots des niveaux Gandalf réussis", type: "screenshot", linkedCompetence: "Développer son projet professionnel" },
+      { title: "Analyse des méthodes utilisées pour contourner les filtres IA", type: "document", linkedCompetence: "Développer son projet professionnel" },
     ]
   },
   {
-  id: 9,
-  name: "AP2 – Cash-cash (Next.js + Postgres + ...)",
-  period: "Dates à préciser",
-  competences: {
-    patrimoine: "✓", incidents: "—", presenceEnLigne: "—",
-    modeProjet: "✓", miseADispo: "✓", devPro: "✓",  // ← devPro ajouté
+    id: 9,
+    name: "AP2 – Cash-cash (Next.js + Postgres + ...)",
+    period: "Dates à préciser",
+    competences: {
+      patrimoine: "✓", incidents: "—", presenceEnLigne: "—",
+      modeProjet: "✓", miseADispo: "✓", devPro: "✓",
+    },
+    description: "Application web de gestion des interventions pour la société CashCash. Système de rôles gestionnaire/technicien, authentification JWT, responsive, déployée sur Next.js + PostgreSQL.",
+    technologies: ["Next.js", "React", "PostgreSQL", "JWT"],
+    competenceDetails: [
+      {
+        id: "patrimoine",
+        name: "Gérer le patrimoine informatique",
+        level: "✓",
+        subCompetences: [
+          { label: "Mettre en place et vérifier les niveaux d'habilitation associés à un service", level: "✓", indicator: "Rôles gestionnaire / technicien distincts avec droits différenciés", proofSuggestion: "Capture du système d'authentification + code de gestion des permissions JWT" },
+          { label: "Gérer des sauvegardes", level: "✓", indicator: "Sauvegardes réalisées, restaurations testées", proofSuggestion: "Script de sauvegarde de la base de données PostgreSQL" }
+        ]
+      },
+      {
+        id: "modeProjet",
+        name: "Travailler en mode projet",
+        level: "✓",
+        subCompetences: [
+          { label: "Analyser les objectifs et les modalités d'organisation d'un projet", level: "✓", indicator: "Objectifs et modalités explicités (Cycle en V ou SCRUM) + diagramme UML acteurs/cas d'utilisation", proofSuggestion: "Backlog projet avec user stories priorisées + diagramme UML gestionnaire/technicien" },
+          { label: "Planifier les activités", level: "✓", indicator: "Planning prévisionnel avec jalons respectés", proofSuggestion: "Board de suivi / planning SCRUM ou Gantt" },
+          { label: "Évaluer les indicateurs de suivi d'un projet et analyser les écarts", level: "✓", indicator: "Écarts constatés et justifiés", proofSuggestion: "Bilan de projet avec écarts constatés" }
+        ]
+      },
+      {
+        id: "miseADispo",
+        name: "Mettre à disposition un service informatique",
+        level: "✓",
+        subCompetences: [
+          { label: "Réaliser les tests d'intégration et d'acceptation d'un service", level: "✓", indicator: "Rapport de tests rédigé et effectué", proofSuggestion: "Rapport de recette / fichier de tests fonctionnels" },
+          { label: "Accompagner les utilisateurs dans la mise en place d'un service", level: "✓", indicator: "Documentation disponible", proofSuggestion: "Guide utilisateur gestionnaire/technicien" }
+        ]
+      },
+      {
+        id: "devPro",
+        name: "Organiser son développement professionnel",
+        level: "✓",
+        subCompetences: [
+          { label: "Mettre en place son environnement d'apprentissage personnel", level: "✓", indicator: "Ressources identifiées pour les technos retenues (Next.js, PostgreSQL, JWT)", proofSuggestion: "Liste des ressources de veille utilisées (docs officielles, comparatif solutions collaboratives)" },
+          { label: "Mettre en œuvre des outils et stratégies de veille informationnelle", level: "✓", indicator: "Veille formalisée et partagée en équipe", proofSuggestion: "Document de veille technologique + comparatif solutions collaboratives avec choix argumenté" },
+          { label: "Développer son projet professionnel", level: "✓", indicator: "Nouvelles technos étudiées et appliquées au projet (PostgreSQL découvert sur AP2)", proofSuggestion: "Comparatif de solutions collaboratives rédigé + choix argumenté de l'architecture" }
+        ]
+      }
+    ],
+    proofs: [
+      { title: "Backlog projet avec user stories priorisées", type: "document", linkedCompetence: "Analyser les objectifs et les modalités d'organisation d'un projet" },
+      { title: "Diagramme UML (cas d'utilisation gestionnaire/technicien)", type: "diagram", linkedCompetence: "Analyser les objectifs et les modalités d'organisation d'un projet" },
+      { title: "Board de suivi / planning SCRUM ou Gantt", type: "diagram", linkedCompetence: "Planifier les activités" },
+      { title: "Bilan de projet avec écarts constatés", type: "document", linkedCompetence: "Évaluer les indicateurs de suivi d'un projet et analyser les écarts" },
+      { title: "Système d'habilitations – captures rôles gestionnaire/technicien", type: "screenshot", linkedCompetence: "Mettre en place et vérifier les niveaux d'habilitation associés à un service" },
+      { title: "Script de sauvegarde base de données PostgreSQL", type: "code", linkedCompetence: "Gérer des sauvegardes" },
+      { title: "Rapport de recette / fichier de tests fonctionnels", type: "document", linkedCompetence: "Réaliser les tests d'intégration et d'acceptation d'un service" },
+      { title: "Guide utilisateur gestionnaire/technicien", type: "document", linkedCompetence: "Accompagner les utilisateurs dans la mise en place d'un service" },
+      { title: "Comparatif solutions collaboratives + choix argumenté", type: "document", linkedCompetence: "Mettre en œuvre des outils et stratégies de veille informationnelle" },
+      { title: "Liste des ressources de veille (Next.js, PostgreSQL, JWT)", type: "document", linkedCompetence: "Mettre en place son environnement d'apprentissage personnel" },
+    ]
   },
-  description: "Application web de gestion des interventions pour la société CashCash. Système de rôles gestionnaire/technicien, authentification JWT, responsive, déployée sur Next.js + PostgreSQL.",
-  technologies: ["Next.js", "React", "PostgreSQL", "JWT", "SCRUM / Cycle en V"],
-  competenceDetails: [
-    {
-      id: "patrimoine",
-      name: "Gérer le patrimoine informatique",
-      level: "✓",
-      subCompetences: [
-        { label: "Mettre en place et vérifier les niveaux d'habilitation", level: "✓", indicator: "Rôles gestionnaire / technicien distincts avec droits différenciés", proofSuggestion: "Capture du système d'authentification + code de gestion des permissions JWT" },
-        { label: "Gérer des sauvegardes", level: "✓", indicator: "Sauvegardes réalisées, restaurations testées", proofSuggestion: "Script de sauvegarde de la base de données PostgreSQL" }
-      ]
-    },
-    {
-      id: "modeProjet",
-      name: "Travailler en mode projet",
-      level: "✓",
-      subCompetences: [
-        { label: "Analyser les objectifs et modalités d'organisation", level: "✓", indicator: "Objectifs et modalités explicités (Cycle en V ou SCRUM)", proofSuggestion: "Backlog projet avec user stories priorisées" },
-        { label: "Planifier les activités", level: "✓", indicator: "Planning prévisionnel avec jalons respectés", proofSuggestion: "Board de suivi / planning SCRUM ou Gantt" },
-        { label: "Évaluer les indicateurs de suivi", level: "✓", indicator: "Écarts constatés et justifiés", proofSuggestion: "Bilan de projet avec écarts constatés" }
-      ]
-    },
-    {
-      id: "miseADispo",
-      name: "Mettre à disposition un service informatique",
-      level: "✓",
-      subCompetences: [
-        { label: "Concevoir un diagramme de cas d'utilisation (UML)", level: "✓", indicator: "Acteurs gestionnaire/technicien et leurs cas d'utilisation identifiés", proofSuggestion: "Diagramme UML exigé par le cahier des charges VDEV" },
-        { label: "Réaliser les tests d'intégration et d'acceptation", level: "✓", indicator: "Rapport de tests rédigé et effectué", proofSuggestion: "Rapport de recette / fichier de tests fonctionnels" },
-        { label: "Déployer un service", level: "✓", indicator: "Application web déployée et opérationnelle", proofSuggestion: "Procédure de déploiement Next.js + PostgreSQL" },
-        { label: "Accompagner les utilisateurs", level: "✓", indicator: "Documentation disponible", proofSuggestion: "Guide utilisateur gestionnaire/technicien" }
-      ]
-    },
-    {
-      id: "devPro",
-      name: "Organiser son développement professionnel",
-      level: "✓",
-      subCompetences: [
-        { label: "Mettre en place son environnement d'apprentissage personnel", level: "✓", indicator: "Ressources identifiées pour les technos retenues (Next.js, PostgreSQL, JWT)", proofSuggestion: "Liste des ressources de veille utilisées (docs officielles, comparatif solutions collaboratives)" },
-        { label: "Mettre en oeuvre des outils et stratégies de veille informationnelle", level: "✓", indicator: "Veille formalisée et partagée en équipe (exigée par le cahier des charges)", proofSuggestion: "Document de veille technologique partagé dans l'outil collaboratif (Drive/Git)" },
-        { label: "Renforcer ses compétences", level: "✓", indicator: "Nouvelles technos étudiées et appliquées au projet", proofSuggestion: "Comparatif de solutions collaboratives rédigé + choix argumenté de l'architecture" }
-      ]
-    }
-  ],
-  proofs: [
-    { title: "Backlog projet avec user stories priorisées", type: "document", linkedCompetence: "Analyser les objectifs et modalités d'organisation" },
-    { title: "Board de suivi / planning SCRUM ou Gantt", type: "diagram", linkedCompetence: "Planifier les activités" },
-    { title: "Bilan de projet avec écarts constatés", type: "document", linkedCompetence: "Évaluer les indicateurs de suivi" },
-    { title: "Système d'habilitations – captures rôles gestionnaire/technicien", type: "screenshot", linkedCompetence: "Mettre en place et vérifier les niveaux d'habilitation" },
-    { title: "Script de sauvegarde base de données PostgreSQL", type: "code", linkedCompetence: "Gérer des sauvegardes" },
-    { title: "Diagramme UML (cas d'utilisation gestionnaire/technicien)", type: "diagram", linkedCompetence: "Concevoir un diagramme de cas d'utilisation (UML)" },
-    { title: "Rapport de recette / fichier de tests fonctionnels", type: "document", linkedCompetence: "Réaliser les tests d'intégration et d'acceptation" },
-    { title: "Guide utilisateur gestionnaire/technicien", type: "document", linkedCompetence: "Accompagner les utilisateurs" },
-    { title: "Comparatif solutions collaboratives + choix argumenté", type: "document", linkedCompetence: "Mettre en oeuvre des outils et stratégies de veille informationnelle" },
-    { title: "Liste des ressources de veille (Next.js, PostgreSQL, JWT)", type: "document", linkedCompetence: "Mettre en place son environnement d'apprentissage personnel" },
-  ]
-},
   {
     id: 10,
     name: "Stage 2 – Redesign site web (AP1)",
@@ -415,9 +412,9 @@ const tasks: Task[] = [
         name: "Développer la présence en ligne",
         level: "✓",
         subCompetences: [
-          { label: "Valoriser l'image de l'organisation", level: "✓", indicator: "Image conforme, enjeux juridiques respectés", proofSuggestion: "Comparaison screenshots avant/après redesign" },
-          { label: "Participer à l'évolution du site Web", level: "✓", indicator: "Site évolué conformément au besoin", proofSuggestion: "Historique Git des modifications + démo" },
-          { label: "Référencer les services en ligne de l'organisation", level: "✓", indicator: "Visibilité mesurée, URL mise à jour sur fiche Google", proofSuggestion: "Screenshot recherche Google – site indexé en position 5 (chiffonniers.net)" }
+          { label: "Participer à la valorisation de l'image de l'organisation sur les médias numériques en tenant compte du cadre juridique et des enjeux économiques", level: "✓", indicator: "Image conforme, enjeux juridiques respectés", proofSuggestion: "Comparaison screenshots avant/après redesign" },
+          { label: "Participer à l'évolution d'un site Web exploitant les données de l'organisation", level: "✓", indicator: "Site évolué conformément au besoin", proofSuggestion: "Historique Git des modifications + démo" },
+          { label: "Référencer les services en ligne de l'organisation et mesurer leur visibilité", level: "✓", indicator: "Visibilité mesurée, URL mise à jour sur fiche Google", proofSuggestion: "Screenshot recherche Google – site indexé en position 5 (chiffonniers.net)" }
         ]
       },
       {
@@ -425,7 +422,7 @@ const tasks: Task[] = [
         name: "Travailler en mode projet",
         level: "✓",
         subCompetences: [
-          { label: "Analyser les objectifs et modalités d'organisation", level: "✓", indicator: "Objectifs et modalités explicités", proofSuggestion: "Tickets / besoins clients et objectifs du redesign documentés" },
+          { label: "Analyser les objectifs et les modalités d'organisation d'un projet", level: "✓", indicator: "Objectifs et modalités explicités", proofSuggestion: "Tickets / besoins clients et objectifs du redesign documentés" },
           { label: "Planifier les activités", level: "✓", indicator: "Activités planifiées, étapes respectées", proofSuggestion: "Planning du redesign (analyse → maquette → dev → recette → mise en ligne)" }
         ]
       },
@@ -435,19 +432,19 @@ const tasks: Task[] = [
         level: "✓",
         subCompetences: [
           { label: "Déployer un service", level: "✓", indicator: "Service déployé opérationnel", proofSuggestion: "Site redesigné en production accessible sur chiffonniers.net" },
-          { label: "Réaliser les tests d'intégration et d'acceptation", level: "✓", indicator: "Tests réalisés sur multi-résolutions", proofSuggestion: "Screenshots responsive validés sur mobile, tablette et desktop" }
+          { label: "Réaliser les tests d'intégration et d'acceptation d'un service", level: "✓", indicator: "Tests réalisés sur multi-résolutions", proofSuggestion: "Screenshots responsive validés sur mobile, tablette et desktop" }
         ]
       }
     ],
     proofs: [
-      { title: "Tickets / besoins clients et objectifs du redesign documentés", type: "document", linkedCompetences: ["Collecter, suivre et orienter des demandes", "Analyser les objectifs et modalités d'organisation"] },
+      { title: "Tickets / besoins clients et objectifs du redesign documentés", type: "document", linkedCompetences: ["Collecter, suivre et orienter des demandes", "Analyser les objectifs et les modalités d'organisation d'un projet"] },
       { title: "Liste des correctifs apportés sur l'ancien site", type: "document", linkedCompetence: "Traiter des demandes concernant les applications" },
-      { title: "Comparaison design avant/après redesign", type: "screenshot", linkedCompetence: "Valoriser l'image de l'organisation" },
-      { title: "Historique Git des modifications + démo live", type: "screenshot", linkedCompetence: "Participer à l'évolution du site Web" },
-      { title: "Visibilité Google – site indexé (chiffonniers.net)", type: "screenshot", linkedCompetence: "Référencer les services en ligne de l'organisation" },
+      { title: "Comparaison design avant/après redesign", type: "screenshot", linkedCompetence: "Participer à la valorisation de l'image de l'organisation sur les médias numériques en tenant compte du cadre juridique et des enjeux économiques" },
+      { title: "Historique Git des modifications + démo live", type: "screenshot", linkedCompetence: "Participer à l'évolution d'un site Web exploitant les données de l'organisation" },
+      { title: "Visibilité Google – site indexé (chiffonniers.net)", type: "screenshot", linkedCompetence: "Référencer les services en ligne de l'organisation et mesurer leur visibilité" },
       { title: "Planning du redesign (analyse → maquette → dev → recette → mise en ligne)", type: "document", linkedCompetence: "Planifier les activités" },
       { title: "Site redesigné en production – chiffonniers.net", type: "screenshot", linkedCompetence: "Déployer un service" },
-      { title: "Screenshots responsive (mobile, tablette, desktop)", type: "screenshot", linkedCompetence: "Réaliser les tests d'intégration et d'acceptation" },
+      { title: "Screenshots responsive (mobile, tablette, desktop)", type: "screenshot", linkedCompetence: "Réaliser les tests d'intégration et d'acceptation d'un service" },
     ]
   },
   {
@@ -466,9 +463,9 @@ const tasks: Task[] = [
         name: "Gérer le patrimoine informatique",
         level: "✓",
         subCompetences: [
-          { label: "Mettre en place et vérifier les niveaux d'habilitation", level: "✓", indicator: "Droits correspondant aux habilitations", proofSuggestion: "Captures du système de rôles (admin/bénévole) dans l'app" },
+          { label: "Mettre en place et vérifier les niveaux d'habilitation associés à un service", level: "✓", indicator: "Droits correspondant aux habilitations", proofSuggestion: "Captures du système de rôles (admin/bénévole) dans l'app" },
           { label: "Gérer des sauvegardes", level: "✓", indicator: "Sauvegardes réalisées, restaurations testées et opérationnelles", proofSuggestion: "Procédure de sauvegarde/restauration documentée + export Excel généré" },
-          { label: "Vérifier les conditions de continuité du service", level: "✓", indicator: "Continuité de service vérifiée", proofSuggestion: "Test de restauration documenté" }
+          { label: "Vérifier les conditions de la continuité d'un service informatique", level: "✓", indicator: "Continuité de service vérifiée", proofSuggestion: "Test de restauration documenté" }
         ]
       },
       {
@@ -484,7 +481,7 @@ const tasks: Task[] = [
         name: "Travailler en mode projet",
         level: "✓",
         subCompetences: [
-          { label: "Analyser les objectifs et modalités d'organisation", level: "✓", indicator: "Analyse des besoins pertinente", proofSuggestion: "Cahier des charges / analyse des besoins de l'association" },
+          { label: "Analyser les objectifs et les modalités d'organisation d'un projet", level: "✓", indicator: "Analyse des besoins pertinente", proofSuggestion: "Cahier des charges / analyse des besoins de l'association" },
           { label: "Planifier les activités", level: "✓", indicator: "Découpage réaliste, livrables conformes", proofSuggestion: "Planning de développement" }
         ]
       },
@@ -493,22 +490,22 @@ const tasks: Task[] = [
         name: "Mettre à disposition un service informatique",
         level: "✓",
         subCompetences: [
-          { label: "Réaliser les tests d'intégration et d'acceptation", level: "✓", indicator: "Tests rédigés et effectués", proofSuggestion: "Plan de tests fonctionnels (pointage, droits, sauvegarde)" },
+          { label: "Réaliser les tests d'intégration et d'acceptation d'un service", level: "✓", indicator: "Tests rédigés et effectués", proofSuggestion: "Plan de tests fonctionnels (pointage, droits, sauvegarde)" },
           { label: "Déployer un service", level: "✓", indicator: "Service déployé opérationnel", proofSuggestion: "Procédure d'installation sur poste bénévole" },
-          { label: "Accompagner les utilisateurs", level: "✓", indicator: "Guide disponible", proofSuggestion: "Guide utilisateur de l'application" }
+          { label: "Accompagner les utilisateurs dans la mise en place d'un service", level: "✓", indicator: "Guide disponible", proofSuggestion: "Guide utilisateur de l'application" }
         ]
       }
     ],
     proofs: [
-      { title: "Cahier des charges de l'association", type: "document", linkedCompetence: "Analyser les objectifs et modalités d'organisation" },
+      { title: "Cahier des charges de l'association", type: "document", linkedCompetence: "Analyser les objectifs et les modalités d'organisation d'un projet" },
       { title: "Planning de développement JavaFX", type: "document", linkedCompetence: "Planifier les activités" },
-      { title: "Screenshots système de rôles (admin/bénévole)", type: "screenshot", linkedCompetence: "Mettre en place et vérifier les niveaux d'habilitation" },
+      { title: "Screenshots système de rôles (admin/bénévole)", type: "screenshot", linkedCompetence: "Mettre en place et vérifier les niveaux d'habilitation associés à un service" },
       { title: "Procédure de sauvegarde/restauration + export Excel généré", type: "document", linkedCompetence: "Gérer des sauvegardes" },
-      { title: "Test de restauration documenté", type: "document", linkedCompetence: "Vérifier les conditions de continuité du service" },
+      { title: "Test de restauration documenté", type: "document", linkedCompetence: "Vérifier les conditions de la continuité d'un service informatique" },
       { title: "Journal des demandes utilisateurs et corrections apportées", type: "document", linkedCompetence: "Traiter des demandes concernant les applications" },
-      { title: "Plan de tests fonctionnels (pointage, droits, sauvegarde)", type: "document", linkedCompetence: "Réaliser les tests d'intégration et d'acceptation" },
+      { title: "Plan de tests fonctionnels (pointage, droits, sauvegarde)", type: "document", linkedCompetence: "Réaliser les tests d'intégration et d'acceptation d'un service" },
       { title: "Procédure d'installation sur poste bénévole", type: "document", linkedCompetence: "Déployer un service" },
-      { title: "Guide utilisateur de l'application", type: "document", linkedCompetence: "Accompagner les utilisateurs" },
+      { title: "Guide utilisateur de l'application", type: "document", linkedCompetence: "Accompagner les utilisateurs dans la mise en place d'un service" },
     ]
   },
   {
@@ -527,7 +524,7 @@ const tasks: Task[] = [
         name: "Travailler en mode projet",
         level: "✓",
         subCompetences: [
-          { label: "Analyser les objectifs et modalités d'organisation", level: "✓", indicator: "Analyse des besoins pertinente", proofSuggestion: "Expression du besoin : contexte d'utilisation (bibliothèque association)" },
+          { label: "Analyser les objectifs et les modalités d'organisation d'un projet", level: "✓", indicator: "Analyse des besoins pertinente", proofSuggestion: "Expression du besoin : contexte d'utilisation (bibliothèque association)" },
           { label: "Planifier les activités", level: "✓", indicator: "Activités planifiées", proofSuggestion: "Planning : acquisition image, prétraitement, OCR, API, affichage" }
         ]
       },
@@ -536,17 +533,17 @@ const tasks: Task[] = [
         name: "Mettre à disposition un service informatique",
         level: "✓",
         subCompetences: [
-          { label: "Réaliser les tests d'intégration et d'acceptation", level: "✓", indicator: "Tests de reconnaissance évalués, rapport produit", proofSuggestion: "Tableau de résultats de reconnaissance (taux de succès OCR sur échantillon)" },
-          { label: "Accompagner les utilisateurs", level: "✓", indicator: "Documentation disponible", proofSuggestion: "Documentation des dépendances (requirements.txt), guide d'installation" }
+          { label: "Réaliser les tests d'intégration et d'acceptation d'un service", level: "✓", indicator: "Tests de reconnaissance évalués, rapport produit", proofSuggestion: "Tableau de résultats de reconnaissance (taux de succès OCR sur échantillon)" },
+          { label: "Accompagner les utilisateurs dans la mise en place d'un service", level: "✓", indicator: "Documentation disponible", proofSuggestion: "Documentation des dépendances (requirements.txt), guide d'installation" }
         ]
       }
     ],
     proofs: [
-      { title: "Expression du besoin / contexte d'utilisation (bibliothèque asso)", type: "document", linkedCompetence: "Analyser les objectifs et modalités d'organisation" },
+      { title: "Expression du besoin / contexte d'utilisation (bibliothèque asso)", type: "document", linkedCompetence: "Analyser les objectifs et les modalités d'organisation d'un projet" },
       { title: "Planning technique (acquisition → prétraitement → OCR → API → affichage)", type: "document", linkedCompetence: "Planifier les activités" },
       { title: "Code Python/OpenCV commenté", type: "code", linkedCompetence: "Planifier les activités" },
-      { title: "Tableau taux de réussite OCR sur échantillon de livres", type: "screenshot", linkedCompetence: "Réaliser les tests d'intégration et d'acceptation" },
-      { title: "Guide d'installation (requirements.txt + README)", type: "document", linkedCompetence: "Accompagner les utilisateurs" },
+      { title: "Tableau taux de réussite OCR sur échantillon de livres", type: "screenshot", linkedCompetence: "Réaliser les tests d'intégration et d'acceptation d'un service" },
+      { title: "Guide d'installation (requirements.txt + README)", type: "document", linkedCompetence: "Accompagner les utilisateurs dans la mise en place d'un service" },
     ]
   }
 ];
