@@ -49,7 +49,6 @@ interface Task {
   proofs: Proof[];
 }
 
-const editMode = ref(false);
 const uploadedUrls = ref<Record<string, string[]>>(
   JSON.parse(localStorage.getItem('proofUrls') ?? '{}')
 );
@@ -748,10 +747,6 @@ const allCompetenceKeys: { id: keyof Task['competences']; name: string }[] = [
                     <polyline points="6 9 12 15 18 9"></polyline>
                   </svg>
                 </button>
-                <button v-if="showProofs" @click="editMode = !editMode"
-                        :class="['edit-toggle', { active: editMode }]">
-                  {{ editMode ? 'Terminer édition' : 'Éditer les preuves' }}
-                </button>
               </div>
 
               <Transition name="slide">
@@ -805,7 +800,6 @@ const allCompetenceKeys: { id: keyof Task['competences']; name: string }[] = [
                               <span class="folder-label">{{ proof.title }}</span>
                             </a>
                           </template>
-                          <button v-if="editMode" @click="removeProofFile(selectedTask.id, index, url)" class="remove-img-btn">✕</button>
                         </div>
                       </div>
 
@@ -813,17 +807,6 @@ const allCompetenceKeys: { id: keyof Task['competences']; name: string }[] = [
                         Upload en cours...
                       </div>
 
-                      <div v-if="editMode" class="upload-zone"
-                          @dragover.prevent
-                          @drop.prevent="(e) => handleDrop(selectedTask!.id, index, e)">
-                        <label :for="`upload-${selectedTask.id}-${index}`" class="upload-label">
-                          Glisser-déposer ou cliquer pour ajouter des fichiers
-                          <input :id="`upload-${selectedTask.id}-${index}`"
-                                  type="file" multiple
-                                  @change="(e) => handleImageUpload(selectedTask!.id, index, e)"
-                                  class="upload-input" />
-                        </label>
-                      </div>
 
                       <div v-else-if="!getProofFiles(selectedTask.id, index).length" class="proof-placeholder">
                         Preuve à ajouter
