@@ -54,7 +54,6 @@ const uploadedUrls = ref<Record<string, string[]>>(
 );
 const uploadingKey = ref<string | null>(null);
 const lightboxUrl = ref<string | null>(null);
-const editMode = ref(false);
 
 
 const getProofKey = (taskId: number, proofIndex: number) =>
@@ -106,14 +105,6 @@ const handleDrop = async (taskId: number, proofIndex: number, event: DragEvent) 
   uploadedUrls.value[key] = urls;
   localStorage.setItem('proofUrls', JSON.stringify(uploadedUrls.value));
   uploadingKey.value = null;
-};
-
-const removeProofFile = async (taskId: number, proofIndex: number, fileUrl: string) => {
-  const key = getProofKey(taskId, proofIndex);
-  const path = fileUrl.split('/proofs/')[1];
-  await supabase.storage.from('proofs').remove([path]);
-  uploadedUrls.value[key] = (uploadedUrls.value[key] ?? []).filter(u => u !== fileUrl);
-  localStorage.setItem('proofUrls', JSON.stringify(uploadedUrls.value));
 };
 
 const loadUrlsFromSupabase = async () => {
@@ -571,42 +562,6 @@ const tasks: Task[] = [
   }
 ];
 
-
-// ── Mode édition ──────────────────────────────────────────
-const editingTask = ref<Task | null>(null);
-const editingTaskIndex = ref<number | null>(null);
-
-const startEditTask = (task: Task, index: number) => {
-  editingTask.value = JSON.parse(JSON.stringify(task)); // deep clone
-  editingTaskIndex.value = index;
-};
-
-const saveEditTask = () => {
-  if (editingTask.value === null || editingTaskIndex.value === null) return;
-  tasks[editingTaskIndex.value] = editingTask.value;
-  editingTask.value = null;
-  editingTaskIndex.value = null;
-};
-
-const cancelEditTask = () => {
-  editingTask.value = null;
-  editingTaskIndex.value = null;
-};
-
-const addProofToEditing = () => {
-  if (!editingTask.value) return;
-  editingTask.value.proofs.push({
-    title: '',
-    type: 'document',
-    linkedCompetence: '',
-  });
-};
-
-const removeProofFromEditing = (index: number) => {
-  if (!editingTask.value) return;
-  editingTask.value.proofs.splice(index, 1);
-};
-
 const selectedTask = ref<Task | null>(null);
 const showProofs = ref(false);
 const expandedCompetence = ref<string | null>(null);
@@ -685,9 +640,6 @@ const allCompetenceKeys: { id: keyof Task['competences']; name: string }[] = [
         <h2>Réalisations</h2>
         <p class="intro">Tableau de compétences BTS SIO SLAM – E5</p>
       </div>
-      <button @click="editMode = !editMode" :class="['btn-edit-mode', { active: editMode }]">
-        {{ editMode ? 'Quitter l\'édition' : 'Mode édition' }}
-      </button>
     </div>
 
     <div class="legend">
@@ -863,14 +815,9 @@ const allCompetenceKeys: { id: keyof Task['competences']; name: string }[] = [
                               <span class="folder-label">{{ proof.title }}</span>
                             </a>
                           </template>
-                          <button v-if="editMode" @click.stop="removeProofFile(selectedTask.id, index, url)" class="btn-remove-file">
-                            Supprimer
-                          </button>
+                          
                         </div>
-                        <label v-if="editMode" class="btn-upload-replace">
-                          Ajouter un fichier
-                          <input type="file" multiple hidden @change="handleImageUpload(selectedTask.id, index, $event)" />
-                        </label>
+                        
                       </div>
 
                       <!-- Zone upload si vide -->
