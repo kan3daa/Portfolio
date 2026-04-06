@@ -54,6 +54,8 @@ const uploadedUrls = ref<Record<string, string[]>>(
 );
 const uploadingKey = ref<string | null>(null);
 const lightboxUrl = ref<string | null>(null);
+const editMode = ref(false);
+
 
 const getProofKey = (taskId: number, proofIndex: number) =>
   `task_${taskId}_proof_${proofIndex}`;
@@ -374,7 +376,7 @@ const tasks: Task[] = [
           level: "✓",
           subCompetences: [
             { label: "Réaliser les tests d'intégration et d'acceptation d'un service", level: "✓", indicator: "Rapport de tests rédigé et effectué", proofSuggestion: "Rapport de recette / fichier de tests fonctionnels" },
-            { label: "Déployer un service", level: "✓", indicator: "Application web déployée et opérationnelle", proofSuggestion: "Procédure de lancement en local (README + instructions d'installation)" },
+            { label: "Déployer un service", level: "✓", indicator: "Application web déployée et opérationnelle", proofSuggestion: "Procédure de déploiment" },
             { label: "Accompagner les utilisateurs dans la mise en place d'un service", level: "✓", indicator: "Documentation disponible pour gérants et techniciens", proofSuggestion: "Guide utilisateur gérant d'agence et technicien" }
           ]
         },
@@ -400,7 +402,7 @@ const tasks: Task[] = [
         { title: "Bilan de projet avec analyse des écarts", type: "document", linkedCompetence: "Évaluer les indicateurs de suivi d'un projet et analyser les écarts" },
         { title: "Issues GitHub fermées – tickets traités et bugs corrigés", type: "screenshot", linkedCompetences: ["Collecter, suivre et orienter des demandes","Traiter des demandes concernant les applications"] },
         { title: "Rapport de recette / tests fonctionnels", type: "document", linkedCompetence: "Réaliser les tests d'intégration et d'acceptation d'un service" },
-        { title: "Procédure de lancement en local (README + instructions d'installation)", type: "document", linkedCompetence: "Déployer un service" },
+        { title: "Procédure de déploiement", type: "document", linkedCompetence: "Déployer un service" },
         { title: "Guide utilisateur gérant d'agence et technicien", type: "document", linkedCompetence: "Accompagner les utilisateurs dans la mise en place d'un service" },
         { title: "Comparatif solutions collaboratives + choix argumenté", type: "document", linkedCompetence: "Mettre en œuvre des outils et stratégies de veille informationnelle" },
         { title: "Liste des ressources consultées (Next.js, PostgreSQL)", type: "document", linkedCompetence: "Mettre en place son environnement d'apprentissage personnel" },
@@ -569,6 +571,42 @@ const tasks: Task[] = [
   }
 ];
 
+
+// ── Mode édition ──────────────────────────────────────────
+const editingTask = ref<Task | null>(null);
+const editingTaskIndex = ref<number | null>(null);
+
+const startEditTask = (task: Task, index: number) => {
+  editingTask.value = JSON.parse(JSON.stringify(task)); // deep clone
+  editingTaskIndex.value = index;
+};
+
+const saveEditTask = () => {
+  if (editingTask.value === null || editingTaskIndex.value === null) return;
+  tasks[editingTaskIndex.value] = editingTask.value;
+  editingTask.value = null;
+  editingTaskIndex.value = null;
+};
+
+const cancelEditTask = () => {
+  editingTask.value = null;
+  editingTaskIndex.value = null;
+};
+
+const addProofToEditing = () => {
+  if (!editingTask.value) return;
+  editingTask.value.proofs.push({
+    title: '',
+    type: 'document',
+    linkedCompetence: '',
+  });
+};
+
+const removeProofFromEditing = (index: number) => {
+  if (!editingTask.value) return;
+  editingTask.value.proofs.splice(index, 1);
+};
+
 const selectedTask = ref<Task | null>(null);
 const showProofs = ref(false);
 const expandedCompetence = ref<string | null>(null);
@@ -642,15 +680,21 @@ const allCompetenceKeys: { id: keyof Task['competences']; name: string }[] = [
 
 <template>
   <div class="realisation-container">
-    <h2>Réalisations</h2>
-    <p class="intro">Tableau de compétences BTS SIO SLAM – E5</p>
+    <div class="page-header">
+      <div>
+        <h2>Réalisations</h2>
+        <p class="intro">Tableau de compétences BTS SIO SLAM – E5</p>
+      </div>
+      <button @click="editMode = !editMode" :class="['btn-edit-mode', { active: editMode }]">
+        {{ editMode ? 'Quitter l\'édition' : 'Mode édition' }}
+      </button>
+    </div>
 
     <div class="legend">
       <span class="legend-item"><span class="icon full">✓</span> Couvre bien</span>
       <span class="legend-item"><span class="icon partial">△</span> Couvre partiellement</span>
       <span class="legend-item"><span class="icon none">—</span> Ne couvre pas</span>
     </div>
-
 
     <div class="table-wrapper">
       <table class="competence-table">
@@ -661,13 +705,8 @@ const allCompetenceKeys: { id: keyof Task['competences']; name: string }[] = [
           </tr>
           <tr>
             <th></th>
-            <th
-              v-for="comp in allCompetenceKeys"
-              :key="comp.id"
-              class="competence-header"
-              style="cursor:pointer; user-select:none;"
-              @click="openCompetenceModal(comp.id)"
-            >
+            <th v-for="comp in allCompetenceKeys" :key="comp.id" class="competence-header"
+                style="cursor:pointer; user-select:none;" @click="openCompetenceModal(comp.id)">
               {{ comp.name }}
             </th>
           </tr>
@@ -810,6 +849,7 @@ const allCompetenceKeys: { id: keyof Task['competences']; name: string }[] = [
                         <span v-else>{{ proof.linkedCompetence }}</span>
                       </div>
 
+                      <!-- Fichiers existants -->
                       <div v-if="getProofFiles(selectedTask.id, index).length" class="proof-files">
                         <div v-for="(url, fi) in getProofFiles(selectedTask.id, index)" :key="fi" class="proof-file-item">
                           <img v-if="isImage(url)" :src="url" :alt="proof.title"
@@ -823,15 +863,28 @@ const allCompetenceKeys: { id: keyof Task['competences']; name: string }[] = [
                               <span class="folder-label">{{ proof.title }}</span>
                             </a>
                           </template>
+                          <button v-if="editMode" @click.stop="removeProofFile(selectedTask.id, index, url)" class="btn-remove-file">
+                            Supprimer
+                          </button>
                         </div>
+                        <label v-if="editMode" class="btn-upload-replace">
+                          Ajouter un fichier
+                          <input type="file" multiple hidden @change="handleImageUpload(selectedTask.id, index, $event)" />
+                        </label>
                       </div>
 
+                      <!-- Zone upload si vide -->
                       <div v-else-if="uploadingKey === getProofKey(selectedTask.id, index)" class="proof-uploading">
                         Upload en cours...
                       </div>
 
-                      <div v-else-if="!getProofFiles(selectedTask.id, index).length" class="proof-placeholder">
-                        Preuve à ajouter
+                      <div v-else class="proof-upload-zone"
+                           @dragover.prevent
+                           @drop.prevent="handleDrop(selectedTask.id, index, $event)">
+                        <label class="proof-upload-label">
+                          <span>Déposer ou cliquer pour uploader</span>
+                          <input type="file" multiple hidden @change="handleImageUpload(selectedTask.id, index, $event)" />
+                        </label>
                       </div>
                     </div>
                   </div>
@@ -853,7 +906,6 @@ const allCompetenceKeys: { id: keyof Task['competences']; name: string }[] = [
               <line x1="6" y1="6" x2="18" y2="18"></line>
             </svg>
           </button>
-
           <article class="modal-content">
             <div class="modal-header">
               <h1 class="task-title">
@@ -861,31 +913,21 @@ const allCompetenceKeys: { id: keyof Task['competences']; name: string }[] = [
               </h1>
               <div class="task-period">Référentiel BTS SIO SLAM – Bloc 1 commun</div>
             </div>
-
             <section class="section">
               <h3>Sous-compétences à valider</h3>
               <div class="competences-accordion">
-                <div
-                  v-for="({ sub, taskName }, idx) in getAggregatedSubCompetences(selectedCompetenceKey!)"
-                  :key="idx"
-                  class="sub-competence"
-                  :style="{ borderLeft: `4px solid ${sub.level === '✓' ? '#22c55e' : sub.level === '△' ? '#f59e0b' : '#d1d5db'}` }"
-                >
+                <div v-for="({ sub, taskName }, idx) in getAggregatedSubCompetences(selectedCompetenceKey!)"
+                    :key="idx" class="sub-competence"
+                    :style="{ borderLeft: `4px solid ${sub.level === '✓' ? '#22c55e' : sub.level === '△' ? '#f59e0b' : '#d1d5db'}` }">
                   <div class="sub-header">
                     <span :class="['sub-badge', getCompetenceIcon(sub.level).class]">
                       {{ getCompetenceIcon(sub.level).icon }}
                     </span>
                     <strong>{{ sub.label }}</strong>
                   </div>
-                  <div class="sub-indicator">
-                    <span class="label-tag">Indicateur attendu :</span> {{ sub.indicator }}
-                  </div>
-                  <div class="sub-proof">
-                    <span class="label-tag">Preuve à montrer :</span> {{ sub.proofSuggestion }}
-                  </div>
-                  <div style="font-size:0.78em; color:#999; margin-top:0.3rem;">
-                    Validé dans : {{ taskName }}
-                  </div>
+                  <div class="sub-indicator"><span class="label-tag">Indicateur attendu :</span> {{ sub.indicator }}</div>
+                  <div class="sub-proof"><span class="label-tag">Preuve à montrer :</span> {{ sub.proofSuggestion }}</div>
+                  <div style="font-size:0.78em; color:#999; margin-top:0.3rem;">Validé dans : {{ taskName }}</div>
                 </div>
               </div>
             </section>
