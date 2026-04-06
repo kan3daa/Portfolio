@@ -54,7 +54,6 @@ const uploadedUrls = ref<Record<string, string[]>>(
 );
 const uploadingKey = ref<string | null>(null);
 const lightboxUrl = ref<string | null>(null);
-const editMode = ref(false);
 
 const getProofKey = (taskId: number, proofIndex: number) =>
   `task_${taskId}_proof_${proofIndex}`;
@@ -652,16 +651,6 @@ const allCompetenceKeys: { id: keyof Task['competences']; name: string }[] = [
       <span class="legend-item"><span class="icon none">—</span> Ne couvre pas</span>
     </div>
 
-    <!-- Bouton Edit Mode -->
-    <div style="display:flex; justify-content:flex-end; margin-bottom:0.75rem;">
-      <button @click="editMode = !editMode" :class="['edit-toggle-btn', { active: editMode }]">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
-          <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
-        </svg>
-        {{ editMode ? 'Terminer l\'édition' : 'Modifier les preuves' }}
-      </button>
-    </div>
 
     <div class="table-wrapper">
       <table class="competence-table">
@@ -834,8 +823,6 @@ const allCompetenceKeys: { id: keyof Task['competences']; name: string }[] = [
                               <span class="folder-label">{{ proof.title }}</span>
                             </a>
                           </template>
-                          <!-- Bouton supprimer uniquement en mode édition -->
-                          <button v-if="editMode" @click="removeProofFile(selectedTask.id, index, url)" class="remove-file-btn">✕</button>
                         </div>
                       </div>
 
@@ -845,21 +832,6 @@ const allCompetenceKeys: { id: keyof Task['competences']; name: string }[] = [
 
                       <div v-else-if="!getProofFiles(selectedTask.id, index).length" class="proof-placeholder">
                         Preuve à ajouter
-                      </div>
-
-                      <!-- Zone upload uniquement en mode édition -->
-                      <div v-if="editMode" class="proof-upload-zone"
-                           @dragover.prevent @drop.prevent="handleDrop(selectedTask.id, index, $event)">
-                        <label :for="`upload-${selectedTask.id}-${index}`" class="upload-label">
-                          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                            <polyline points="17 8 12 3 7 8"></polyline>
-                            <line x1="12" y1="3" x2="12" y2="15"></line>
-                          </svg>
-                          Ajouter un fichier
-                        </label>
-                        <input :id="`upload-${selectedTask.id}-${index}`" type="file" multiple
-                               style="display:none" @change="handleImageUpload(selectedTask.id, index, $event)" />
                       </div>
                     </div>
                   </div>
