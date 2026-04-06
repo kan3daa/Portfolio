@@ -54,6 +54,7 @@ const uploadedUrls = ref<Record<string, string[]>>(
 );
 const uploadingKey = ref<string | null>(null);
 const lightboxUrl = ref<string | null>(null);
+const editMode = ref(false);
 
 const getProofKey = (taskId: number, proofIndex: number) =>
   `task_${taskId}_proof_${proofIndex}`;
@@ -137,7 +138,7 @@ const tasks: Task[] = [
   {
     id: 1,
     name: "AP1 – Site web assos (backend + frontend + données)",
-    period: "Dates à préciser",
+    period: "2024 - 2025",
     competences: {
       patrimoine: "✓", incidents: "✓", presenceEnLigne: "✓",
       modeProjet: "✓", miseADispo: "✓", devPro: "✓",
@@ -202,7 +203,8 @@ const tasks: Task[] = [
         subCompetences: [
           { label: "Mettre en place son environnement d'apprentissage personnel", level: "✓", indicator: "Ressources identifiées et exploitées pour monter en compétence sur React", proofSuggestion: "Liste des outils de veille utilisés (MDN, React.dev, Dev.to, Node Weekly, JS Weekly)" },
           { label: "Mettre en œuvre des outils et stratégies de veille informationnelle", level: "✓", indicator: "Veille active sur React/JS pendant le développement", proofSuggestion: "Journal de veille React/JS avec sources consultées pendant AP1" },
-          { label: "Développer son projet professionnel", level: "✓", indicator: "Utilisation de React dans le projet AP1 (composants, hooks, intégration frontend)", proofSuggestion: "Extraits de code React utilisés dans le projet – composants, useState, appels API" }
+          { label: "Développer son projet professionnel", level: "✓", indicator: "Utilisation de React dans le projet AP1 (composants, hooks, intégration frontend)", proofSuggestion: "Extraits de code React utilisés dans le projet – composants, useState, appels API" },
+          { label: "Gérer son identité professionnelle", level: "✓", indicator: "Présence en ligne professionnelle structurée autour du projet AP1", proofSuggestion: "Portfolio en ligne ou profil GitHub avec le projet AP1 documenté et visible" }
         ]
       }
     ],
@@ -224,6 +226,7 @@ const tasks: Task[] = [
       { title: "Liste des correctifs apportés suite aux retours utilisateurs", type: "document", linkedCompetence: "Traiter des demandes concernant les applications" },
       { title: "Liste des outils de veille utilisés (MDN, React.dev, Dev.to, newsletters)", type: "document", linkedCompetence: "Mettre en place son environnement d'apprentissage personnel" },
       { title: "Extraits de code React – composants et hooks utilisés dans AP1", type: "code", linkedCompetence: "Développer son projet professionnel" },
+      { title: "Portfolio / profil GitHub avec AP1 documenté", type: "screenshot", linkedCompetence: "Gérer son identité professionnelle" },
     ]
   },
   {
@@ -279,7 +282,8 @@ const tasks: Task[] = [
         subCompetences: [
           { label: "Mettre en place son environnement d'apprentissage personnel", level: "✓", indicator: "Démarche d'auto-formation structurée avant application sur projet réel", proofSuggestion: "Notes de lecture de la documentation Docker et Docker Compose officielle, liste des ressources consultées" },
           { label: "Développer son projet professionnel", level: "✓", indicator: "Compétences acquises sur Docker/Compose et appliquées au projet Visual Inventory", proofSuggestion: "Projets d'entraînement Docker réalisés avant le stage, puis intégration au projet open source" },
-          { label: "Mettre en œuvre des outils et stratégies de veille informationnelle", level: "✓", indicator: "Sources techniques identifiées et exploitées", proofSuggestion: "Références consultées : documentation officielle Docker, guides DevOps, CONTRIBUTING.md du projet" }
+          { label: "Mettre en œuvre des outils et stratégies de veille informationnelle", level: "✓", indicator: "Sources techniques identifiées et exploitées", proofSuggestion: "Références consultées : documentation officielle Docker, guides DevOps, CONTRIBUTING.md du projet" },
+          { label: "Gérer son identité professionnelle", level: "✓", indicator: "Contribution open source visible et référencée publiquement", proofSuggestion: "Profil GitHub avec contributions au dépôt Visual Inventory (commits, PR fusionnées)" }
         ]
       }
     ],
@@ -294,6 +298,7 @@ const tasks: Task[] = [
       { title: "Notes d'apprentissage Docker et ressources consultées", type: "document", linkedCompetence: "Mettre en place son environnement d'apprentissage personnel" },
       { title: "Projets d'entraînement Docker réalisés", type: "screenshot", linkedCompetence: "Développer son projet professionnel" },
       { title: "Liste des références de veille (docs Docker, guides DevOps)", type: "document", linkedCompetence: "Mettre en œuvre des outils et stratégies de veille informationnelle" },
+      { title: "Profil GitHub – contributions au dépôt Visual Inventory", type: "screenshot", linkedCompetence: "Gérer son identité professionnelle" },
     ]
   },
   {
@@ -313,7 +318,8 @@ const tasks: Task[] = [
         level: "✓",
         subCompetences: [
           { label: "Mettre en œuvre des outils et stratégies de veille informationnelle", level: "✓", indicator: "Veille sur techniques émergentes", proofSuggestion: "Document de synthèse sur les risques IA / prompt injection avec sources OWASP LLM Top 10" },
-          { label: "Développer son projet professionnel", level: "✓", indicator: "Compétences renforcées sur la sécurité IA", proofSuggestion: "Screenshots des niveaux Gandalf réussis, analyse des méthodes utilisées" }
+          { label: "Développer son projet professionnel", level: "✓", indicator: "Compétences renforcées sur la sécurité IA", proofSuggestion: "Screenshots des niveaux Gandalf réussis, analyse des méthodes utilisées" },
+          { label: "Gérer son identité professionnelle", level: "✓", indicator: "Démarche de veille sécurité IA documentée et partageable", proofSuggestion: "Article ou note de veille publiée sur GitHub/portfolio sur les risques prompt injection" }
         ]
       }
     ],
@@ -321,75 +327,92 @@ const tasks: Task[] = [
       { title: "Synthèse des risques prompt injection (OWASP LLM Top 10)", type: "document", linkedCompetence: "Mettre en œuvre des outils et stratégies de veille informationnelle" },
       { title: "Screenshots des niveaux Gandalf réussis", type: "screenshot", linkedCompetence: "Développer son projet professionnel" },
       { title: "Analyse des méthodes utilisées pour contourner les filtres IA", type: "document", linkedCompetence: "Développer son projet professionnel" },
+      { title: "Note de veille sécurité IA publiée sur GitHub/portfolio", type: "document", linkedCompetence: "Gérer son identité professionnelle" },
     ]
   },
   {
-    id: 9,
-    name: "AP2 – Cash-cash (Next.js + Postgres + ...)",
-    period: "Dates à préciser",
-    competences: {
-      patrimoine: "✓", incidents: "—", presenceEnLigne: "—",
-      modeProjet: "✓", miseADispo: "✓", devPro: "✓",
-    },
-    description: "Application web de gestion des interventions pour la société CashCash. Système de rôles gestionnaire/technicien, authentification JWT, responsive, déployée sur Next.js + PostgreSQL.",
-    technologies: ["Next.js", "React", "PostgreSQL", "JWT"],
-    competenceDetails: [
-      {
-        id: "patrimoine",
-        name: "Gérer le patrimoine informatique",
-        level: "✓",
-        subCompetences: [
-          { label: "Mettre en place et vérifier les niveaux d'habilitation associés à un service", level: "✓", indicator: "Rôles gestionnaire / technicien distincts avec droits différenciés", proofSuggestion: "Capture du système d'authentification + code de gestion des permissions JWT" },
-          { label: "Gérer des sauvegardes", level: "✓", indicator: "Sauvegardes réalisées, restaurations testées", proofSuggestion: "Script de sauvegarde de la base de données PostgreSQL" }
-        ]
+      id: 9,
+      name: "AP2 – Cash-cash (Next.js + PostgreSQL)",
+      period: "2025 - 2026",
+      competences: {
+        patrimoine: "✓", incidents: "✓", presenceEnLigne: "—",
+        modeProjet: "✓", miseADispo: "✓", devPro: "✓",
       },
-      {
-        id: "modeProjet",
-        name: "Travailler en mode projet",
-        level: "✓",
-        subCompetences: [
-          { label: "Analyser les objectifs et les modalités d'organisation d'un projet", level: "✓", indicator: "Objectifs et modalités explicités (Cycle en V ou SCRUM) + diagramme UML acteurs/cas d'utilisation", proofSuggestion: "Backlog projet avec user stories priorisées + diagramme UML gestionnaire/technicien" },
-          { label: "Planifier les activités", level: "✓", indicator: "Planning prévisionnel avec jalons respectés", proofSuggestion: "Board de suivi / planning SCRUM ou Gantt" },
-          { label: "Évaluer les indicateurs de suivi d'un projet et analyser les écarts", level: "✓", indicator: "Écarts constatés et justifiés", proofSuggestion: "Bilan de projet avec écarts constatés" }
-        ]
-      },
-      {
-        id: "miseADispo",
-        name: "Mettre à disposition un service informatique",
-        level: "✓",
-        subCompetences: [
-          { label: "Réaliser les tests d'intégration et d'acceptation d'un service", level: "✓", indicator: "Rapport de tests rédigé et effectué", proofSuggestion: "Rapport de recette / fichier de tests fonctionnels" },
-          { label: "Accompagner les utilisateurs dans la mise en place d'un service", level: "✓", indicator: "Documentation disponible", proofSuggestion: "Guide utilisateur gestionnaire/technicien" }
-        ]
-      },
-      {
-        id: "devPro",
-        name: "Organiser son développement professionnel",
-        level: "✓",
-        subCompetences: [
-          { label: "Mettre en place son environnement d'apprentissage personnel", level: "✓", indicator: "Ressources identifiées pour les technos retenues (Next.js, PostgreSQL, JWT)", proofSuggestion: "Liste des ressources de veille utilisées (docs officielles, comparatif solutions collaboratives)" },
-          { label: "Mettre en œuvre des outils et stratégies de veille informationnelle", level: "✓", indicator: "Veille formalisée et partagée en équipe", proofSuggestion: "Document de veille technologique + comparatif solutions collaboratives avec choix argumenté" },
-          { label: "Développer son projet professionnel", level: "✓", indicator: "Nouvelles technos étudiées et appliquées au projet (PostgreSQL découvert sur AP2)", proofSuggestion: "Comparatif de solutions collaboratives rédigé + choix argumenté de l'architecture" }
-        ]
-      }
-    ],
-    proofs: [
-      { title: "Backlog projet avec user stories priorisées", type: "document", linkedCompetence: "Analyser les objectifs et les modalités d'organisation d'un projet" },
-      { title: "Diagramme UML (cas d'utilisation gestionnaire/technicien)", type: "diagram", linkedCompetence: "Analyser les objectifs et les modalités d'organisation d'un projet" },
-      { title: "Board de suivi / planning SCRUM ou Gantt", type: "diagram", linkedCompetence: "Planifier les activités" },
-      { title: "Bilan de projet avec écarts constatés", type: "document", linkedCompetence: "Évaluer les indicateurs de suivi d'un projet et analyser les écarts" },
-      { title: "Système d'habilitations – captures rôles gestionnaire/technicien", type: "screenshot", linkedCompetence: "Mettre en place et vérifier les niveaux d'habilitation associés à un service" },
-      { title: "Script de sauvegarde base de données PostgreSQL", type: "code", linkedCompetence: "Gérer des sauvegardes" },
-      { title: "Rapport de recette / fichier de tests fonctionnels", type: "document", linkedCompetence: "Réaliser les tests d'intégration et d'acceptation d'un service" },
-      { title: "Guide utilisateur gestionnaire/technicien", type: "document", linkedCompetence: "Accompagner les utilisateurs dans la mise en place d'un service" },
-      { title: "Comparatif solutions collaboratives + choix argumenté", type: "document", linkedCompetence: "Mettre en œuvre des outils et stratégies de veille informationnelle" },
-      { title: "Liste des ressources de veille (Next.js, PostgreSQL, JWT)", type: "document", linkedCompetence: "Mettre en place son environnement d'apprentissage personnel" },
-    ]
+      description: "Développement en équipe de 3 d'une application web de gestion des interventions pour la société CashCash (vendeur de terminaux point de vente). Rôles : gérant d'agence (back office) et technicien (front office). Authentification sécurisée, base de données PostgreSQL administrée via pgAdmin, modélisation préalable par MCD.",
+      technologies: ["Next.js", "React", "PostgreSQL", "pgAdmin", "MCD", "Cycle en V / SCRUM"],
+      competenceDetails: [
+        {
+          id: "patrimoine",
+          name: "Gérer le patrimoine informatique",
+          level: "✓",
+          subCompetences: [
+            { label: "Mettre en place et vérifier les niveaux d'habilitation associés à un service", level: "✓", indicator: "Rôles gérant d'agence / technicien distincts avec droits différenciés", proofSuggestion: "Capture du système d'authentification + code de gestion des permissions" },
+            { label: "Gérer des sauvegardes", level: "✓", indicator: "Sauvegardes réalisées via pgAdmin, restaurations testées", proofSuggestion: "Procédure de sauvegarde/restauration PostgreSQL via pgAdmin" }
+          ]
+        },
+        {
+          id: "incidents",
+          name: "Répondre aux incidents et demandes",
+          level: "✓",
+          subCompetences: [
+            { label: "Collecter, suivre et orienter des demandes", level: "✓", indicator: "Demandes collectées et suivies en équipe", proofSuggestion: "Board de suivi des tâches avec tickets traités (GitHub Projects ou équivalent)" },
+            { label: "Traiter des demandes concernant les applications", level: "✓", indicator: "Correctifs apportés suite aux retours de tests", proofSuggestion: "Liste des bugs corrigés avec description des correctifs apportés" }
+          ]
+        },
+        {
+          id: "modeProjet",
+          name: "Travailler en mode projet",
+          level: "✓",
+          subCompetences: [
+            { label: "Analyser les objectifs et les modalités d'organisation d'un projet", level: "✓", indicator: "Objectifs et modalités explicités + diagramme UML", proofSuggestion: "Diagramme de cas d'utilisation UML gérant/technicien + MCD de la base de données" },
+            { label: "Planifier les activités", level: "✓", indicator: "Planning prévisionnel avec jalons respectés", proofSuggestion: "Planning SCRUM ou Gantt du projet" },
+            { label: "Évaluer les indicateurs de suivi d'un projet et analyser les écarts", level: "✓", indicator: "Écarts constatés et justifiés", proofSuggestion: "Bilan de projet avec analyse des écarts" }
+          ]
+        },
+        {
+          id: "miseADispo",
+          name: "Mettre à disposition un service informatique",
+          level: "✓",
+          subCompetences: [
+            { label: "Réaliser les tests d'intégration et d'acceptation d'un service", level: "✓", indicator: "Rapport de tests rédigé et effectué", proofSuggestion: "Rapport de recette / fichier de tests fonctionnels" },
+            { label: "Déployer un service", level: "✓", indicator: "Application web déployée et opérationnelle", proofSuggestion: "Procédure de lancement en local (README + instructions d'installation)" },
+            { label: "Accompagner les utilisateurs dans la mise en place d'un service", level: "✓", indicator: "Documentation disponible pour gérants et techniciens", proofSuggestion: "Guide utilisateur gérant d'agence et technicien" }
+          ]
+        },
+        {
+          id: "devPro",
+          name: "Organiser son développement professionnel",
+          level: "✓",
+          subCompetences: [
+            { label: "Mettre en place son environnement d'apprentissage personnel", level: "✓", indicator: "Ressources identifiées pour Next.js et PostgreSQL", proofSuggestion: "Liste des ressources consultées (docs officielles Next.js, PostgreSQL)" },
+            { label: "Mettre en œuvre des outils et stratégies de veille informationnelle", level: "✓", indicator: "Veille formalisée et partagée en équipe", proofSuggestion: "Comparatif solutions collaboratives retenu par l'équipe avec choix argumenté" },
+            { label: "Développer son projet professionnel", level: "✓", indicator: "PostgreSQL et Next.js découverts et appliquées au projet", proofSuggestion: "Extraits de code Next.js + requêtes PostgreSQL réalisées dans le projet" },
+            { label: "Gérer son identité professionnelle", level: "✓", indicator: "Projet CashCash valorisé dans le portfolio", proofSuggestion: "Fiche projet CashCash dans le portfolio avec captures et description du rôle tenu" }
+          ]
+        }
+      ],
+      proofs: [
+        { title: "MCD de la base de données CashCash", type: "diagram", linkedCompetence: "Analyser les objectifs et les modalités d'organisation d'un projet" },
+        { title: "Diagramme de cas d'utilisation UML (gérant / technicien)", type: "diagram", linkedCompetence: "Analyser les objectifs et les modalités d'organisation d'un projet" },
+        { title: "Script SQL de création de la base PostgreSQL", type: "code", linkedCompetence: "Analyser les objectifs et les modalités d'organisation d'un projet" },
+        { title: "Système d'authentification – captures rôles gérant/technicien", type: "screenshot", linkedCompetence: "Mettre en place et vérifier les niveaux d'habilitation associés à un service" },
+        { title: "Procédure de sauvegarde/restauration PostgreSQL via pgAdmin", type: "document", linkedCompetence: "Gérer des sauvegardes" },
+        { title: "Planning SCRUM ou Gantt du projet", type: "diagram", linkedCompetence: "Planifier les activités" },
+        { title: "Bilan de projet avec analyse des écarts", type: "document", linkedCompetence: "Évaluer les indicateurs de suivi d'un projet et analyser les écarts" },
+        { title: "Issues GitHub fermées – tickets traités et bugs corrigés", type: "screenshot", linkedCompetences: ["Collecter, suivre et orienter des demandes","Traiter des demandes concernant les applications"] },
+        { title: "Rapport de recette / tests fonctionnels", type: "document", linkedCompetence: "Réaliser les tests d'intégration et d'acceptation d'un service" },
+        { title: "Procédure de lancement en local (README + instructions d'installation)", type: "document", linkedCompetence: "Déployer un service" },
+        { title: "Guide utilisateur gérant d'agence et technicien", type: "document", linkedCompetence: "Accompagner les utilisateurs dans la mise en place d'un service" },
+        { title: "Comparatif solutions collaboratives + choix argumenté", type: "document", linkedCompetence: "Mettre en œuvre des outils et stratégies de veille informationnelle" },
+        { title: "Liste des ressources consultées (Next.js, PostgreSQL)", type: "document", linkedCompetence: "Mettre en place son environnement d'apprentissage personnel" },
+        { title: "Extraits de code Next.js + requêtes PostgreSQL du projet", type: "code", linkedCompetence: "Développer son projet professionnel" },
+        { title: "Fiche projet CashCash dans le portfolio", type: "screenshot", linkedCompetence: "Gérer son identité professionnelle" },
+      ]
   },
   {
     id: 10,
     name: "Stage 2 – Redesign site web (AP1)",
-    period: "Dates à préciser",
+    period: "Janvier 2026",
     competences: {
       patrimoine: "—", incidents: "✓", presenceEnLigne: "✓",
       modeProjet: "✓", miseADispo: "✓", devPro: "—",
@@ -629,6 +652,17 @@ const allCompetenceKeys: { id: keyof Task['competences']; name: string }[] = [
       <span class="legend-item"><span class="icon none">—</span> Ne couvre pas</span>
     </div>
 
+    <!-- Bouton Edit Mode -->
+    <div style="display:flex; justify-content:flex-end; margin-bottom:0.75rem;">
+      <button @click="editMode = !editMode" :class="['edit-toggle-btn', { active: editMode }]">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+          <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+        </svg>
+        {{ editMode ? 'Terminer l\'édition' : 'Modifier les preuves' }}
+      </button>
+    </div>
+
     <div class="table-wrapper">
       <table class="competence-table">
         <thead>
@@ -781,11 +815,11 @@ const allCompetenceKeys: { id: keyof Task['competences']; name: string }[] = [
                     <div class="proof-content">
                       <div class="proof-title">{{ proof.title }}</div>
                       <div class="proof-type">{{ proof.type }}</div>
-                        <div v-if="proof.linkedCompetence || proof.linkedCompetences?.length" class="proof-linked">
-                          Couvre :
-                          <span v-if="proof.linkedCompetences">{{ proof.linkedCompetences.join(' · ') }}</span>
-                          <span v-else>{{ proof.linkedCompetence }}</span>
-                        </div>
+                      <div v-if="proof.linkedCompetence || proof.linkedCompetences?.length" class="proof-linked">
+                        Couvre :
+                        <span v-if="proof.linkedCompetences">{{ proof.linkedCompetences.join(' · ') }}</span>
+                        <span v-else>{{ proof.linkedCompetence }}</span>
+                      </div>
 
                       <div v-if="getProofFiles(selectedTask.id, index).length" class="proof-files">
                         <div v-for="(url, fi) in getProofFiles(selectedTask.id, index)" :key="fi" class="proof-file-item">
@@ -800,6 +834,8 @@ const allCompetenceKeys: { id: keyof Task['competences']; name: string }[] = [
                               <span class="folder-label">{{ proof.title }}</span>
                             </a>
                           </template>
+                          <!-- Bouton supprimer uniquement en mode édition -->
+                          <button v-if="editMode" @click="removeProofFile(selectedTask.id, index, url)" class="remove-file-btn">✕</button>
                         </div>
                       </div>
 
@@ -807,9 +843,23 @@ const allCompetenceKeys: { id: keyof Task['competences']; name: string }[] = [
                         Upload en cours...
                       </div>
 
-
                       <div v-else-if="!getProofFiles(selectedTask.id, index).length" class="proof-placeholder">
                         Preuve à ajouter
+                      </div>
+
+                      <!-- Zone upload uniquement en mode édition -->
+                      <div v-if="editMode" class="proof-upload-zone"
+                           @dragover.prevent @drop.prevent="handleDrop(selectedTask.id, index, $event)">
+                        <label :for="`upload-${selectedTask.id}-${index}`" class="upload-label">
+                          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="17 8 12 3 7 8"></polyline>
+                            <line x1="12" y1="3" x2="12" y2="15"></line>
+                          </svg>
+                          Ajouter un fichier
+                        </label>
+                        <input :id="`upload-${selectedTask.id}-${index}`" type="file" multiple
+                               style="display:none" @change="handleImageUpload(selectedTask.id, index, $event)" />
                       </div>
                     </div>
                   </div>
